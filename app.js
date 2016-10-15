@@ -11,27 +11,27 @@ var awayTeam = [];
 
 function logName(element, index, array){
     if(index < 30)
-      homeTeam.push('<li>'+element.name_full+'</li>');
+      homeTeam.push('<li class="list-group-item">'+element.name_full+'</li>');
 }
 
 function logName2(element, index, array){
     if(index < 30)
-      awayTeam.push('<li>'+element.name_full+'</li>');
+      awayTeam.push('<li class="list-group-item">'+element.name_full+'</li>');
 }
 
 
 request.get(url, (err, response, body) => {
-			if(!err && response.statusCode === 200){
+	if(!err && response.statusCode === 200){
         var jsontext = body.replace(/\//ig, '');
         var data = JSON.parse(jsontext);
-				data.home_team.players.forEach(logName);
+		data.home_team.players.forEach(logName);
         data.away_team.players.forEach(logName2);
         homeTeam = homeTeam.join('');
         awayTeam = awayTeam.join('');
-			}
-			else{
-				console.log('no_data');
-			}
+	}
+	else{
+		console.log('no_data');
+	}
 });
 
 server.get('/', (req, res) => {
@@ -46,7 +46,7 @@ server.get('/list',(req, res) => {
 });
 
 server.get('/mvp', (req, res) => {
-  es.sendFile(__dirname + "/mvp.html");
+  	res.sendFile(__dirname + "/mvp.html");
 });
 
 server.listen(8080);
