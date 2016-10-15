@@ -23,7 +23,8 @@
 		.row {
 			padding-bottom: 20px
 		}
-		li:hover {
+
+		.list-group-item:hover {
 			background-color: green
 		}
 
@@ -34,6 +35,16 @@
 
 		#submit {
 			margin: auto
+		}
+
+		#selected-item {
+			font-weight: bold;
+			font-size: 18px;
+		}
+
+		.navitemname {
+			display: inline-block;
+			width: 100%
 		}
 
 	</style>
@@ -52,32 +63,44 @@
 						<button class="navbar-toggler navbtn" id="raffle" data-toggle="collapse" data-target="#CollapsingNavbar" href="#">Raffle</button>
 					</li>
 				</ul>
-		    </div>
+			</div>
 		</div>
-		<nav class="navbar navbar-light bg-faded">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#CollapsingNavbar">
-				&#9776;
-			</button>
-		</nav>
+
+		<div class="navitemname">
+			<nav class="navbar navbar-light bg-faded nav-inline">
+				<ul class="nav nav-inline">
+					<li class="nav-item">
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#CollapsingNavbar"> &#9776; </button>
+					</li>
+					<li class="nav-item">
+						<p id="selected-item">MVP Vote</p>
+					</li>
+				</ul>
+			</nav>
+		</div>
 
 		<div class="container" id="main-content">
 			<div class="teamlist">
-				<h4 align="center" id="ChooseMVPTitle">Choose the MVP Player</h4>
-				<div class="row">
-					<div class="col-xs-6 col-sm-6">
-						<h4 align="center">Team 1
-							<img src="img/duck.png" alt="Mountain View" style="width:50px;height:auto;">
-						</h4>
-						<ul class="list-group scrollable-menu" id="home-team">
-						</ul>
-					</div>
-					<div class="col-xs-6 col-sm-6">
-						<h4 align="center">Team 2
-							<img src="./img/cal.png" alt="Mountain View" style="width:50px;height:auto;">
-						</h4>
-						<ul class="list-group scrollable-menu" id="away-team">
-						</ul>
-					</div>
+			<h4 align="center" id="ChooseMVPTitle">Choose the MVP Player</h4>
+			<div class="container">
+				<div class="col-xs-6 col-sm-6">
+					<h4 align="center">Oregon Ducks
+						<img src="./img/duck.png" alt="Mountain View" style="width:50px;height:auto;">
+					</h4>
+				</div>
+				<div class="col-xs-6 col-sm-6">
+					<h4 align="center">California Golden Bears
+						<img src="./img/cal.png" alt="Mountain View" style="width:50px;height:auto;">
+					</h4>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-6 col-sm-6">
+					<ul class="list-group scrollable-menu" id="home-team"></ul>
+				</div>
+				<div class="col-xs-6 col-sm-6">
+					<ul class="list-group scrollable-menu" id="away-team"></ul>
 				</div>
 			</div>
 		</div>
@@ -99,6 +122,11 @@
 					$('#home-team').append(data.homeTeam);
 					$('#away-team').append(data.awayTeam);
 				});
+			});
+
+			$( ".navbtn" ).click(function() {
+				var currentName = $(this).text();
+				$("#selected-item").text(currentName);
 			});
 		</script>
 	</body>
