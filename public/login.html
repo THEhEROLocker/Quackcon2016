@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sample FirebaseUI App</title>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/0.4.0/firebase-ui-auth.js"></script>
+    <script type="text/javascript">
+        // Firebase config.
+        var config = {
+            'authDomain': 'quackcon-7bc9b.firebaseapp.com',
+            'apiKey': "AIzaSyDvsg_PsXEKRVtpfCB2RiSnz7bFY6yn4JM"
+        };
+
+        // FirebaseUI config.
+        var uiConfig = {
+            // Query parameter name for mode.
+            'queryParameterForWidgetMode': 'mode',
+            // Query parameter name for sign in success url.
+            'queryParameterForSignInSuccessUrl': 'signInSuccessUrl',
+            'signInSuccessUrl': 'http://www.quackcon.com/',
+            'signInOptions': [
+                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+                firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+                firebase.auth.GithubAuthProvider.PROVIDER_ID,
+                firebase.auth.EmailAuthProvider.PROVIDER_ID
+            ],
+            // Terms of service url.
+            'tosUrl': '',
+            'callbacks': {
+                'signInSuccess': function (currentUser, credential, redirectUrl) {
+                    return true;
+                }
+            }
+        };
+
+        // Initialize the FirebaseUI Widget using Firebase.
+        var app = firebase.initializeApp(config);
+        var auth = app.auth();
+        var ui = new firebaseui.auth.AuthUI(auth);
+        // The start method will wait until the DOM is loaded.
+        ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/0.4.0/firebase-ui-auth.css"/>
+</head>
+<body>
+<!-- The surrounding HTML is left untouched by FirebaseUI.
+     Your app may use that space for branding, controls and other customizations.-->
+<h1>Google Login</h1>
+<div id="firebaseui-auth-container"></div>
+</body>
+</html>
